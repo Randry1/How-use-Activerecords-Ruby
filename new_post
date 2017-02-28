@@ -1,0 +1,17 @@
+#1. Создаём элемент класса
+
+@c = Client.new params[:client] # params[:client] - задается в erb в параметре импута name следющим образом name="client[name]"
+
+# Можно передать параметры хешом
+
+@c = Client.new :name => @name, :phone => '8-800-200 00 00', :barber => @barber
+
+#2. Созраняем с проверкой
+
+  if @c.save
+    return erb '<h2>Спасибо вы записались</h2>'
+  else
+    @error << @c.errors.full_messages.first #Возвращает список ошибок ври валидации
+    erb :visit
+  end
+  
