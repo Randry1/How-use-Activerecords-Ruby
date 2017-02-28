@@ -1,0 +1,17 @@
+#Добавление подчиненной таблицы
+# Создаем элемент класса 
+
+ @com = Comment.new ({:client_id => @client_id, :name => @nameCommentator, :post => @post}) #Обязательно добавляем id
+ 
+ #Сохраняем
+ 
+   if @com.save
+    erb :client
+  else
+    @error = @com.errors.full_messages.first
+    erb :client
+  end
+  
+ #Просмотр записи 
+ 
+  @posts = Comment.where(client_id: @clientOne.id)
