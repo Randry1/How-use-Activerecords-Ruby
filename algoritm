@@ -1,0 +1,44 @@
+#1. Create class 
+
+class Comment < ActiveRecord::Base
+  belongs_to :client
+  has_many :talks
+  validates :name, presence:  true, length: {minimum: 3}
+  validates :post, presence: true
+end
+
+#2. Создать файл Rakefile
+
+require './app'
+require 'sinatra/activerecord/rake'
+
+#3. Через консоль Таблица в множественном числе на конце S
+
+rake -T
+
+rake db:create_maigation NAME=create_ctients
+
+#4.  Идем в файл /db/migration/цифры_create_clients и создаем таблицу
+
+class CreateClients < ActiveRecord::Migration
+  def change
+    create_table :clients do |t|
+      t.text :name
+      t.text :phone
+      t.text :datestamp
+      t.text :barber
+      t.text :color
+
+      t.timestamps null: true #Создает столбик с датой и временем создания
+    end
+  end
+end
+
+#5. В консоле вводим команду которая создаст таблицу в базе данных
+
+rake db:mirgate
+
+
+
+
+
